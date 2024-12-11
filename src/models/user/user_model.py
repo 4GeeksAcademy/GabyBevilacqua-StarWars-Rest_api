@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
+from .. import db
 
-db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,7 +9,8 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
-
+    
+#metodods de instacia
     def serialize(self):
         return {
             "id": self.id,
