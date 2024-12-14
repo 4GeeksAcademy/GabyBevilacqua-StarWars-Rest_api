@@ -5,7 +5,9 @@ class Planets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
     description = db.Column(db.String(900), nullable=False)
-    density = db.Column(db.String(60), nullable=False)
+    population = db.Column(db.String(60), nullable=False)
+    climate = db.Column(db.String(60), nullable=False)
+
     
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -18,6 +20,7 @@ class Planets(db.Model):
             "id": self.id,
             "name": self.name,
             "description": self.description,
-            "density": self.density
+            "population": self.population,
+            "climate" : self.climate
             # do not serialize the password, its a security breach
         }

@@ -9,7 +9,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, User
-from routes import user_bp, people_bp, planets_bp
+from routes import user_bp, people_bp, planets_bp, favorites_bp
 #from models import Person
 
 app = Flask(__name__)
@@ -27,6 +27,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(user_bp, url_prefix="/users")
 app.register_blueprint(people_bp, url_prefix="/people")
 app.register_blueprint(planets_bp, url_prefix="/planets")
+app.register_blueprint(favorites_bp, url_prefix='/favorites')
 
 
 MIGRATE = Migrate(app, db)

@@ -1,4 +1,5 @@
 from flask import Blueprint
+from models.planets.planets_model import Planets
 
 planets_bp = Blueprint('planets',__name__)
 
