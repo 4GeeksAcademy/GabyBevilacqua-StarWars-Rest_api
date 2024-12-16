@@ -1,6 +1,5 @@
 from .. import db
 
-
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
@@ -8,8 +7,8 @@ class People(db.Model):
     description = db.Column(db.String(900), nullable=False)
     eye_color = db.Column(db.String(60), nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    favorites = db.relationship('Favorites', back_populates='people')
 
+    favorites = db.relationship('Favorites', back_populates='people', lazy=True)
 
     def __repr__(self):
         return '<People %r>' % self.name

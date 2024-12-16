@@ -2,13 +2,13 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-from flask import Flask, request, jsonify, url_for
+from flask import Flask, jsonify
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, People, Planets, Favorites
 from routes import user_bp, people_bp, planets_bp, favorites_bp
 #from models import Person
 
@@ -24,17 +24,15 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.register_blueprint(user_bp, url_prefix="/users")
-app.register_blueprint(people_bp, url_prefix="/people")
-app.register_blueprint(planets_bp, url_prefix="/planets")
-app.register_blueprint(favorites_bp, url_prefix='/favorites')
-
-
 MIGRATE = Migrate(app, db)
 db.init_app(app)
 CORS(app)
 setup_admin(app)
 
+app.register_blueprint(user_bp, url_prefix="/users")
+app.register_blueprint(people_bp, url_prefix="/people")
+app.register_blueprint(planets_bp, url_prefix="/planets")
+app.register_blueprint(favorites_bp, url_prefix='/favorites')
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)

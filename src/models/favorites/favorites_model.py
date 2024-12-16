@@ -1,6 +1,5 @@
 from .. import db
 
-
 class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -8,9 +7,9 @@ class Favorites(db.Model):
     planets_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
-    user = db.relationship('User', back_populates='Favorites')
-    people = db.relationship('People', back_populates='Favorites')
-    planets = db.relationship('Planets', back_populates='Favorites')
+    user = db.relationship('User', back_populates='favorites')
+    people = db.relationship('People', back_populates='favorites')
+    planets = db.relationship('Planets', back_populates='favorites')
 
     def __repr__(self):
         return '<Favourites %r>' % self.id
